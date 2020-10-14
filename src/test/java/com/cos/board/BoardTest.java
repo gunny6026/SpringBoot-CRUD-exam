@@ -30,7 +30,7 @@ public class BoardTest {
 		
 
 		System.out.println(board2);
-		Board board3 = Board.builder().title("제목3").conetent("내용3").build();
+		Board board3 = Board.builder().title("제목3").content("내용3").build();
 		
 		System.out.println(board3);
 		

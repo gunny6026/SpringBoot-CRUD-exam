@@ -39,5 +39,7 @@ public class Board {
 	
 	
 	
+	//Board board1 = Board.builder().title("ㅎㅇ").content("dd").build();
+
 
 }

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,8 +28,8 @@ public class BoardService {
 	}
 	
 	
-	public List<Board> 글목록보기() {
-		 return  boardRepository.findAll();
+	public Page<Board> 글목록보기(Pageable pageable) {
+		 return  boardRepository.findAll(pageable);
 	}
 	
 	@Transactional
@@ -36,7 +38,7 @@ public class BoardService {
 				orElseThrow( ()->new RuntimeException("ID값이 잘 못 들어왔습니다."));
 	
 		 //조회수 증가 = 더티체킹
-		 
+		 board.setReadCount(board.getReadCount()+1);
 		 
 		 
 		 
@@ -47,16 +49,18 @@ public class BoardService {
 			
 	@Transactional		
 	public void 글삭제하기(int id) {
-		boardRepository.deleteById(id);
+		//boardRepository.deleteById(id);
+		boardRepository.mDeleteById(id);
 	}
 			
 	
 	@Transactional
 	public void 글수정하기(int id , BoardSaveRequestDto dto) {
 		//더티 체킹
-		Board boardEntity = boardRepository.findById(id).
-				orElseThrow( ()->new RuntimeException("ID값이 잘 못 들어왔습니다."));
+		//Board boardEntity = boardRepository.findById(id).
+		//		orElseThrow( ()->new RuntimeException("ID값이 잘 못 들어왔습니다."));
 		
+		Board boardEntity = boardRepository.mFindById(id);
 		boardEntity.setTitle(dto.getTitle());
 		boardEntity.setContent(dto.getContent());
 	}

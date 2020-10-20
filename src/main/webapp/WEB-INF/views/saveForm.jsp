@@ -4,14 +4,21 @@
 
 <main>
 
-<h1>글쓰기 페이지</h1>
+<div ><h1>글쓰기 페이지</h1></div>
 <hr/>
 <form action="/save" method="post">
-	<input type="text" name="title" />
-	<input type="text" name="content" />
-	<button>글쓰기 완료</button>
+	<p>제목</p><input type="text" name="title" />
+	<br/>
+	<p>내용</p><textarea id="summernote" name="content"></textarea>
+	<br/>
+	<button class="btn btn-info">글쓰기 완료</button>
 	
 </form>
 
+<script>
+    $(document).ready(function() {
+        $('#summernote').summernote();
+    });
+  </script>
 </main>
 	<%@ include file="layout/footer.jsp" %>

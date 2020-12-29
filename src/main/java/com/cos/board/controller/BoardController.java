@@ -50,7 +50,7 @@ public class BoardController {
 	public String save(BoardSaveRequestDto dto) {
 		boardService.글쓰기(dto);
 
-		return "ok";
+		return "list";
 
 	}
 
